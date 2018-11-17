@@ -107,11 +107,12 @@ App = {
       App.contracts.Adoption.deployed().then(function(instance) {
         adoptionInstance = instance;
 
-        // Execute adopt as a transaction by sending account
+        // TODO: combine adopt and pay
         return adoptionInstance.adopt(petId, {from: account});
       }).then(function(result) {
         return App.markAdopted();
       }).then(function() {
+        // TODO: unit tests
         return adoptionInstance.send(999999999999999999, {from: account});
       }).catch(function(err) {
         console.log(err.message);
