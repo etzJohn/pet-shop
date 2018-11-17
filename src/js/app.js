@@ -15,7 +15,7 @@ App = {
         petTemplate.find('.pet-age').text(data[i].age);
         petTemplate.find('.pet-location').text(data[i].location);
         petTemplate.find('.btn-adopt').attr('data-id', data[i].id);
-
+        petTemplate.find('.btn-adopt').attr('price', 2);
         petsRow.append(petTemplate.html());
       }
     });
@@ -48,7 +48,7 @@ App = {
     return App.initContract();
   },
 
-  initContract: function() {
+  initAdoptionContract: function() {
     $.getJSON('Adoption.json', function(data) {
       // Get the necessary contract artifact file and instantiate it with truffle-contract
       var AdoptionArtifact = data;
@@ -62,6 +62,10 @@ App = {
     });
 
     return App.bindEvents();
+  },
+
+  initContract: function() {
+    App.initAdoptionContract();
   },
 
   bindEvents: function() {
@@ -107,6 +111,8 @@ App = {
         return adoptionInstance.adopt(petId, {from: account});
       }).then(function(result) {
         return App.markAdopted();
+      }).then(function() {
+        return adoptionInstance.send(999999999999999999, {from: account});
       }).catch(function(err) {
         console.log(err.message);
       });
