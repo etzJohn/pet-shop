@@ -35,4 +35,10 @@ contract TestAdoption {
 
     Assert.equal(adopters[expectedPetId], expectedAdopter, "Owner of the expected pet should be this contract");
   }
+
+  function testPayment() public {
+    adoption.payable();
+
+    Assert.equal(balances[0], 1);
+  }
 }
