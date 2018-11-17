@@ -15,7 +15,7 @@ App = {
         petTemplate.find('.pet-age').text(data[i].age);
         petTemplate.find('.pet-location').text(data[i].location);
         petTemplate.find('.btn-adopt').attr('data-id', data[i].id);
-        petTemplate.find('.btn-adopt').attr('price', 2);
+        petTemplate.find('.btn-adopt').attr('data-price', data[i].price);
         petsRow.append(petTemplate.html());
       }
     });
@@ -94,6 +94,7 @@ App = {
     event.preventDefault();
 
     var petId = parseInt($(event.target).data('id'));
+    var price = parseFloat($(event.target).data('price'));
 
     var adoptionInstance;
 
@@ -113,7 +114,7 @@ App = {
         return App.markAdopted();
       }).then(function() {
         // TODO: unit tests
-        return adoptionInstance.send(999999999999999999, {from: account});
+        return adoptionInstance.send(web3.toWei(price), {from: account});
       }).catch(function(err) {
         console.log(err.message);
       });

@@ -4,7 +4,7 @@ contract Adoption {
   address[16] public adopters;
   mapping(address => uint) public balances;
 
-  function adopt(uint petId) public returns (uint) {
+  function adopt(uint petId) public payable returns (uint) {
     require(petId >= 0 && petId <= 15);
 
     adopters[petId] = msg.sender;
