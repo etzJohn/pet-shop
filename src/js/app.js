@@ -108,6 +108,12 @@ App = {
       App.contracts.Adoption.deployed().then(function(instance) {
         adoptionInstance = instance;
 
+        var paymentSuccess = adoptionInstance.PaymentSuccess(function(err, result) {
+          if (result) {
+            event.target.parentElement.parentElement.style.opacity = 0.4;
+          }
+        });
+
         // TODO: combine adopt and pay
         return adoptionInstance.adopt(petId, {from: account});
       }).then(function(result) {
