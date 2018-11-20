@@ -6,6 +6,8 @@ how to run:
 
 * [download ganache](#https://truffleframework.com/ganache)
 * run `npm i`
+* run `truffle compile`
+* run `truffle migrate`
 * run `npm run dev`
 * open http://localhost:3000/
 * open metamask, allow the dApp to connect to your account
